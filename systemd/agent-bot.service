@@ -1,0 +1,22 @@
+[Unit]
+Description=Telegram <-> Claude Code agent bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=agent
+Group=agent
+WorkingDirectory=/srv/agent/app/bot
+EnvironmentFile=/etc/agent-bot.env
+ExecStart=/srv/agent/app/.venv/bin/python /srv/agent/app/bot/bot.py
+Restart=on-failure
+RestartSec=5
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/agent
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
