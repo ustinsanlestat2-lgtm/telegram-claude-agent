@@ -11,7 +11,7 @@ from typing import AsyncIterator
 
 from config import Config
 
-PR_URL_RE = re.compile(r"https://github\.com/[^\s\"'"'"']+/pull/\d+")
+PR_URL_RE = re.compile(r"https://github\.com/[^\s\"']+/pull/\d+")
 
 
 def build_prompt(repo: str, issue_number: int) -> str:
