@@ -1,7 +1,7 @@
 """
 Loads and validates configuration from environment variables.
 All secrets are expected to be injected at process start (systemd EnvironmentFile,
-or `export`'d before running manually) — never hardcoded here.
+or `export`'d before running manually) ? never hardcoded here.
 """
 import os
 from dataclasses import dataclass, field
@@ -26,6 +26,7 @@ class Config:
     claude_binary: str = "claude"
     max_turns: int = 40
     job_timeout_seconds: int = 1800  # 30 min per job, hard cap
+    agent_config_path: Path = Path("/srv/agent/config/CLAUDE.md")
 
 
 def load_config() -> Config:
@@ -45,4 +46,7 @@ def load_config() -> Config:
         claude_binary=os.environ.get("CLAUDE_BINARY", "claude"),
         max_turns=int(os.environ.get("AGENT_MAX_TURNS", "40")),
         job_timeout_seconds=int(os.environ.get("AGENT_JOB_TIMEOUT_SECONDS", "1800")),
+        agent_config_path=Path(
+            os.environ.get("AGENT_CONFIG_PATH", "/srv/agent/config/CLAUDE.md")
+        ),
     )

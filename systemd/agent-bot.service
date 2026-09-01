@@ -14,9 +14,9 @@ Restart=on-failure
 RestartSec=5
 # Hardening
 NoNewPrivileges=true
+PrivateTmp=true
 ProtectSystem=strict
-ReadWritePaths=/srv/agent
-ProtectHome=true
+ReadWritePaths=/srv/agent /home/agent
 
 [Install]
 WantedBy=multi-user.target
